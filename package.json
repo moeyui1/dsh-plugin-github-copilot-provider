@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-github-copilot-provider",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "type": "module",
   "description": "Copilot OAuth login inside the native dsh provider card",

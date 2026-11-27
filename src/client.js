@@ -87,14 +87,19 @@ window.__ModuleLoader__.load({
         state && !state.available && h('div', { role: 'alert' }, '当前 profile 未提供 Copilot OAuth，请检查 pi-ai 和 authorization 服务。')
       );
     }
+    // The keyed slot selects the adapter family; its owner identifies the selected provider.
+    function CopilotCard(props) {
+      if (props.provider?.provider !== 'github-copilot') return null;
+      return h(Panel, props);
+    }
+
     return {
       inject: ['slots', 'connection'],
       apply(ctx) {
         ctx.slots.inject('settings.models.provider-card', () => ctx.slots.register({
           name: 'settings.models.provider-card', key: 'llm-pi-ai',
-          select: owner => owner.provider.provider === 'github-copilot' ? owner : null,
           inject: () => ({ rpc: ctx.connection.rpc }),
-        }, Panel));
+        }, CopilotCard));
       },
     };
   },
