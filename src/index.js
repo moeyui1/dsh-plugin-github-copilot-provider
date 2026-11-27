@@ -1,13 +1,15 @@
+import { bindAccountDiscovery } from './discovery.js';
 import { LoginController, InputError, KEY } from './controller.js';
 import { ModelSync } from './sync.js';
 
 export const name = 'provider-login';
-export const inject = ['connection', 'authorization', 'credentials', 'settings', 'copilotCatalog'];
+export const inject = ['connection', 'authorization', 'credentials', 'settings', 'copilotCatalog', 'llm'];
 const methods = new Set(['status', 'start', 'answer', 'cancel', 'logout', 'useOAuth']);
 
 export function apply(ctx) {
   const controller = new LoginController(ctx);
   const sync = new ModelSync(ctx);
+  bindAccountDiscovery(ctx, sync);
   sync.trigger();
   ctx.on('authorization/settled', (key, outcome) => {
     if (key === KEY && outcome === 'authorized') sync.trigger();

@@ -96,6 +96,7 @@ export class ModelSync {
   }
 
   async run() {
+    this.discoveryIds = undefined;
     const {desc, profile} = this.profile();
     const record = await this.ctx.credentials.readRecord(KEY);
     if (!profile || profile.apiKeyEnv || record?.payload?.type !== 'oauth') {
@@ -124,6 +125,7 @@ export class ModelSync {
       this.state = 'idle';
       return;
     }
+    this.discoveryIds = new Set(rows);
     const overrides = profile.modelOverrides ?? {};
     // The resolved schema materializes empty input/compat defaults. Compare the
     // authored list so those placeholders neither trigger writes nor pin a model.
