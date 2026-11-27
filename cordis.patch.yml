@@ -1,0 +1,7 @@
+- id: llm-pi-ai
+  inject: [copilotCatalog]
+- insert:
+    - id: provider-login-catalog
+      name: dsh-plugin-provider-login/catalog
+    - id: provider-login
+      name: dsh-plugin-provider-login

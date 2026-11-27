@@ -1,0 +1,35 @@
+{
+  "name": "dsh-plugin-provider-login",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Copilot OAuth login inside the native dsh provider card",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./client": "./src/client.js",
+    "./package.json": "./package.json",
+    "./catalog": "./src/catalog.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "cordis.patch.yml"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings-models",
+        "@deepseek-ai/dsh-client-connection"
+      ],
+      "platform": "web"
+    }
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.9.0"
+  }
+}
