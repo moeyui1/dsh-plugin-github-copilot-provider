@@ -26,3 +26,19 @@ test('native discovery respects the synced account scope and host lifecycle', as
   assert.deepEqual(await list('github-copilot'),[]);
   events.get('dispose')();assert.equal(registry.get('llm-pi-ai'),replacement);
 });
+
+test('first activation attaches after pi-ai announces an as-yet empty registry', async () => {
+  const registry = new Map();
+  const events = new Map();
+  const ctx = {llm:{discoveries:registry},on:(event,cb)=>events.set(event,cb)};
+  bindAccountDiscovery(ctx, {discoveryIds:new Set(['eligible'])});
+  events.get('llm/adapters-updated')();
+  const native = async () => [{id:'eligible'},{id:'static-only'}];
+  registry.set('llm-pi-ai', native);
+  await Promise.resolve();
+  assert.deepEqual(await registry.get('llm-pi-ai')({provider:'github-copilot'}), [{id:'eligible'}]);
+  events.get('llm/adapters-updated')();
+  events.get('dispose')();
+  await Promise.resolve();
+  assert.equal(registry.get('llm-pi-ai'), native);
+});

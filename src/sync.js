@@ -99,7 +99,12 @@ export class ModelSync {
     this.discoveryIds = undefined;
     const {desc, profile} = this.profile();
     const record = await this.ctx.credentials.readRecord(KEY);
-    if (!profile || profile.apiKeyEnv || record?.payload?.type !== 'oauth') {
+    if (profile?.apiKeyEnv || record?.payload?.type !== 'oauth') {
+      // A new OAuth draft has no account catalog to offer before sign-in.
+      if (!profile?.apiKeyEnv && record?.kind !== 'api-key' &&
+          !(await this.ctx.credentials.describe('COPILOT_GITHUB_TOKEN')).configured) {
+        this.discoveryIds = new Set();
+      }
       this.state = 'idle';
       return;
     }
@@ -108,7 +113,7 @@ export class ModelSync {
     let rows, outcome;
     const signal = AbortSignal.any([this.lifetime.signal, AbortSignal.timeout(25000)]);
     try {
-      const models = await this.discover(credential, profile, signal);
+      const models = await this.discover(credential, profile ?? {}, signal);
       this.lifetime.signal.throwIfAborted();
       await this.ctx.copilotCatalog.remember(models);
       rows = models.map(m => m.id);
@@ -121,11 +126,16 @@ export class ModelSync {
     // A late reply from a previous account/profile must never commit.
     const latest = await this.ctx.credentials.readRecord(KEY);
     this.lifetime.signal.throwIfAborted();
-    if (latest?.payload?.refresh !== credential.refresh || this.profile().desc?.revision !== desc.revision) {
+    if (latest?.payload?.refresh !== credential.refresh) {
       this.state = 'idle';
       return;
     }
     this.discoveryIds = new Set(rows);
+    // Discovery also serves the unsaved Add Provider card. Persist only saved routes.
+    if (!profile || this.profile().desc?.revision !== desc?.revision) {
+      this.state = rows.length ? outcome : 'empty';
+      return;
+    }
     const overrides = profile.modelOverrides ?? {};
     // The resolved schema materializes empty input/compat defaults. Compare the
     // authored list so those placeholders neither trigger writes nor pin a model.

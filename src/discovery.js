@@ -4,9 +4,11 @@ export function bindAccountDiscovery(ctx, sync) {
   const registry = ctx.llm.discoveries;
   if (!(registry instanceof Map)) throw new Error('Unsupported dsh model discovery registry');
 
+  let disposed = false;
   let original;
   let wrapped;
   function attach() {
+    if (disposed) return;
     const discover = registry.get(namespace);
     if (!discover || discover === wrapped) return;
     original = discover;
@@ -21,8 +23,13 @@ export function bindAccountDiscovery(ctx, sync) {
     registry.set(namespace, wrapped);
   }
   attach();
-  ctx.on('llm/adapters-updated', attach);
+  // pi-ai announces its directory before registering discovery in the same turn.
+  ctx.on('llm/adapters-updated', () => {
+    attach();
+    queueMicrotask(attach);
+  });
   ctx.on('dispose', () => {
+    disposed = true;
     if (wrapped && registry.get(namespace) === wrapped) registry.set(namespace, original);
   });
 }
