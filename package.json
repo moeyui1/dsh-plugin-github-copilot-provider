@@ -1,5 +1,5 @@
 {
-  "name": "dsh-plugin-provider-login",
+  "name": "dsh-plugin-github-copilot-provider",
   "version": "0.2.1",
   "private": true,
   "type": "module",

@@ -2,6 +2,6 @@
   inject: [copilotCatalog]
 - insert:
     - id: provider-login-catalog
-      name: dsh-plugin-provider-login/catalog
+      name: dsh-plugin-github-copilot-provider/catalog
     - id: provider-login
-      name: dsh-plugin-provider-login
+      name: dsh-plugin-github-copilot-provider

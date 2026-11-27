@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: 'dsh-plugin-provider-login',
+  id: 'dsh-plugin-github-copilot-provider',
   factory(require) {
     const React = require('react');
     const { createElement: h, useState, useEffect } = React;

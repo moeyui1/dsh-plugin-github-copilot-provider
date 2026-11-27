@@ -1,4 +1,4 @@
-# dsh-plugin-provider-login
+# dsh-plugin-github-copilot-provider
 
 在 DeepSeek Harness 的 **设置 → 模型 → github-copilot** 卡片中登录 GitHub Copilot。登录后，dsh 的模型选择器会按账号目录更新，包含宿主静态目录发布后新增的兼容模型。插件使用 dsh 的凭证存储和 pi-ai 的 OAuth 流程。使用者需要具备 Copilot 访问权限的 GitHub 账号。
 
@@ -31,9 +31,9 @@ dsh plugin --profile web add "$PWD"
   inject: [copilotCatalog]
 - insert:
     - id: provider-login-catalog
-      name: dsh-plugin-provider-login/catalog
+      name: dsh-plugin-github-copilot-provider/catalog
     - id: provider-login
-      name: dsh-plugin-provider-login
+      name: dsh-plugin-github-copilot-provider
 ```
 
 若已有同名 `llm-pi-ai` 条目，将 `copilotCatalog` 加进现有的 `inject` 列表，保留原条目的 `config`。每个插件 ID 只添加一次。保存后重启 `dsh web`，刷新浏览器。
@@ -68,7 +68,7 @@ pi-ai 会按需续换短期 token。使用 OAuth 时，pi-ai 采用 Copilot 账�
 卸载前，可在原生编辑器移除依赖动态目录的模型。然后从 web profile 删除上文的两个插件注册条目和 `copilotCatalog` 注入项，运行以下命令并重启 dsh。请保留同一配置文件中自己的其他设置。
 
 ```sh
-dsh plugin --profile web remove dsh-plugin-provider-login
+dsh plugin --profile web remove dsh-plugin-github-copilot-provider
 ```
 
 ## 开发与验证
