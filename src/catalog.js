@@ -1,11 +1,12 @@
-import { createRequire, findPackageJSON } from 'node:module';
+import { resolveDshHost } from './host.js';
+import { findPackageJSON } from 'node:module';
 import { pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { mkdir, readdir, readFile, rename, writeFile, rm } from 'node:fs/promises';
 import { createHash, randomUUID } from 'node:crypto';
 
 // Use the same ESM module instance as dsh-llm-pi-ai, including for linked local installs.
-const host = createRequire(process.argv[1]);
+const host = resolveDshHost(process.argv[1]);
 const adapter = pathToFileURL(host.resolve('@deepseek-ai/dsh-llm-pi-ai/package.json'));
 const piRoot = dirname(findPackageJSON('@earendil-works/pi-ai', adapter));
 const load = file => import(pathToFileURL(join(piRoot, 'dist/providers', file)));
