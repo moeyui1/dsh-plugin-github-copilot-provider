@@ -6,7 +6,7 @@
 
 ## 快速安装
 
-安装好 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)，并确认本机 Git 能读取这个私有仓库，然后运行：
+安装好 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)后，运行：
 
 ```sh
 dsh plugin --profile web add git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git

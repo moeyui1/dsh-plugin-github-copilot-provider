@@ -6,7 +6,7 @@ Sign in to GitHub Copilot from DeepSeek Harness and choose a model available to 
 
 ## Quick install
 
-With [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) installed and Git configured to read this private repository, run:
+With [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) installed, run:
 
 ```sh
 dsh plugin --profile web add git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git
