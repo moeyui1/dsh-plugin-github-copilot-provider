@@ -14,6 +14,14 @@ dsh plugin --profile web add "git+https://github.com/moeyui1/dsh-plugin-github-c
 
 Start or restart `dsh web`, then refresh the page. Tested with dsh `0.2.2-rc.1` on Windows.
 
+## Check for updates in dsh
+
+In **Plugins → Experimental plugins**, enable **Custom plugin indexes**. Open **Discover** and add the index URL below. Refresh the index to see whether a newer release is available. In dsh 0.2.2-rc.1, Discover shows update status. To upgrade a Git installation, use the commands in the next section.
+
+```text
+https://raw.githubusercontent.com/moeyui1/dsh-plugin-github-copilot-provider/main/market-index.json
+```
+
 ## Automatically update on startup
 
 The install command above tracks stable release tags. If you previously installed from the default branch or pinned a tag such as `#v0.2.4`, run the install command once to switch.

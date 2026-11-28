@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "title": "GitHub Copilot for DeepSeek Harness",
+  "plugins": [
+    {
+      "name": "dsh-plugin-github-copilot-provider",
+      "title": {
+        "en": "GitHub Copilot",
+        "zh": "GitHub Copilot"
+      },
+      "description": {
+        "en": "Sign in and use the models available to your Copilot account.",
+        "zh": "登录并使用 Copilot 账号可用的模型。"
+      },
+      "homepage": "https://github.com/moeyui1/dsh-plugin-github-copilot-provider",
+      "repository": {
+        "url": "https://github.com/moeyui1/dsh-plugin-github-copilot-provider"
+      },
+      "versions": [
+        {
+          "version": "0.2.5",
+          "publishTimestamp": 1795791330,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git",
+            "commit": "b02b0b167b0d9a50fa55e6ea87179c199783c257"
+          }
+        },
+        {
+          "version": "0.2.4",
+          "publishTimestamp": 1795790975,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git",
+            "commit": "c8dbcd6b5dccf020000360ce5a3941aa1b767ef8"
+          }
+        },
+        {
+          "version": "0.2.3",
+          "publishTimestamp": 1795790670,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git",
+            "commit": "b180a5b289bdaf9b6155d6733e5a0d6d783b8f98"
+          }
+        }
+      ]
+    }
+  ]
+}

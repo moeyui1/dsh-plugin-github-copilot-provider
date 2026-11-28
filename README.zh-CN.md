@@ -14,6 +14,14 @@ dsh plugin --profile web add "git+https://github.com/moeyui1/dsh-plugin-github-c
 
 启动或重启 `dsh web`，刷新页面。已在 Windows 的 dsh `0.2.2-rc.1` 上验证。
 
+## 在 dsh 中检查更新
+
+在侧栏 **插件 → 实验性插件** 启用 **自定义插件索引**，然后在 **发现** 页添加下面的索引地址。刷新索引后，已安装旧版的用户会看到可用更新。dsh 0.2.2-rc.1 的发现页提供版本提示，升级 Git 安装的插件可使用下一节的命令。
+
+```text
+https://raw.githubusercontent.com/moeyui1/dsh-plugin-github-copilot-provider/main/market-index.json
+```
+
 ## 启动时自动更新
 
 上面的安装命令会跟踪稳定版本标签。之前从默认分支安装或固定了 `#v0.2.4` 等标签的用户，重新执行一次安装命令即可切换。
