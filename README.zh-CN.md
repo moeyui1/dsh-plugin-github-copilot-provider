@@ -9,10 +9,23 @@
 安装好 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)后，运行：
 
 ```sh
-dsh plugin --profile web add git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git
+dsh plugin --profile web add "git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git#semver:*"
 ```
 
 启动或重启 `dsh web`，刷新页面。已在 Windows 的 dsh `0.2.2-rc.1` 上验证。
+
+## 启动时自动更新
+
+上面的安装命令会跟踪稳定版本标签。之前从默认分支安装或固定了 `#v0.2.4` 等标签的用户，重新执行一次安装命令即可切换。
+
+希望每次启动时自动检查更新的用户，可把下面两行放进平时启动 dsh 的脚本或服务启动流程。第一行更新 web profile 中的这个插件，第二行启动 dsh 并加载已安装的版本。
+
+```sh
+dsh plugin --profile web update dsh-plugin-github-copilot-provider
+dsh web
+```
+
+单独运行 `dsh web` 会使用已安装的版本。也可以按需执行第一行，然后重启 dsh。
 
 ## 登录
 

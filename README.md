@@ -9,10 +9,23 @@ Sign in to GitHub Copilot from DeepSeek Harness and choose a model available to 
 With [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) installed, run:
 
 ```sh
-dsh plugin --profile web add git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git
+dsh plugin --profile web add "git+https://github.com/moeyui1/dsh-plugin-github-copilot-provider.git#semver:*"
 ```
 
 Start or restart `dsh web`, then refresh the page. Tested with dsh `0.2.2-rc.1` on Windows.
+
+## Automatically update on startup
+
+The install command above tracks stable release tags. If you previously installed from the default branch or pinned a tag such as `#v0.2.4`, run the install command once to switch.
+
+To check for updates each time you launch dsh, put these two lines in your usual startup script or service launcher. The first updates this plugin in the web profile. The second starts dsh and loads the installed version.
+
+```sh
+dsh plugin --profile web update dsh-plugin-github-copilot-provider
+dsh web
+```
+
+Starting with `dsh web` alone uses the installed version. If you prefer to update manually, run the first line when convenient and restart dsh.
 
 ## Sign in
 
